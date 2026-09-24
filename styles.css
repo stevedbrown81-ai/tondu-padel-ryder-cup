@@ -54,31 +54,6 @@ img { max-width: 100%; display: block; }
     linear-gradient(300deg, rgba(25, 104, 210, .2), transparent 38%);
   z-index: 1;
 }
-.hero-photo {
-  position: absolute;
-  inset: 0 0 0 46%;
-  background: url("assets/group.jpg") 50% 54% / cover no-repeat;
-  filter: saturate(.72) contrast(1.08);
-}
-.hero-photo::after {
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 24%;
-  content: "";
-  background: linear-gradient(90deg, rgba(7, 16, 31, .5), rgba(7, 16, 31, 0));
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
-  -webkit-mask-image: linear-gradient(90deg, #000 0%, rgba(0,0,0,.58) 46%, transparent 100%);
-  mask-image: linear-gradient(90deg, #000 0%, rgba(0,0,0,.58) 46%, transparent 100%);
-}
-.hero-shade {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(90deg, #07101f 0%, rgba(7, 16, 31, .98) 31%, rgba(7, 16, 31, .44) 68%, rgba(7, 16, 31, .58) 100%),
-    linear-gradient(0deg, #07101f 0%, transparent 45%);
-}
 .hero-inner {
   position: relative;
   z-index: 2;
@@ -376,8 +351,6 @@ footer img { opacity: .7; }
 @media (max-width: 700px) {
   .hero { min-height: 0; display: flex; flex-direction: column; }
   .hero-inner { order: 1; min-height: 0; width: calc(100% - 28px); padding: 27px 0 20px; gap: 24px; }
-  .hero-photo { position: relative; inset: auto; order: 2; width: 100%; aspect-ratio: 4 / 3; background-position: center; background-size: contain; opacity: 1; filter: saturate(.82) contrast(1.04); }
-  .hero-photo::after, .hero-shade { display: none; }
   .scoreboard { margin-top: 14px; }
   .brand-lockup { gap: 12px; }
   .brand-lockup img { width: 61px; height: 61px; }
