@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07101f">
+  <meta name="description" content="Fixtures and results for the Tondu Padel Ryder Cup 2026.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tondu Padel Ryder Cup 2026">
+  <meta property="og:description" content="Eight matches. Two teams. One cup. Follow every result.">
+  <title>Tondu Padel Ryder Cup 2026</title>
+  <link rel="icon" href="assets/tondu-badge.png">
+  <link rel="apple-touch-icon" href="assets/tondu-badge.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-photo" aria-hidden="true"></div>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="brand-lockup">
+        <img src="assets/tondu-badge.png" alt="Tondu RFC Padel badge" width="84" height="84">
+        <div>
+          <p class="eyebrow">Tondu RFC Padel</p>
+          <h1>Ryder Cup <span class="year"><i class="year-red">20</i><i class="year-blue">26</i></span></h1>
+        </div>
+      </div>
+      <button class="admin-entry" id="adminEntry" type="button" aria-label="Open organiser access">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 10V8a5 5 0 0 1 10 0v2m-9 0h8a2 2 0 0 1 2 2v7H6v-7a2 2 0 0 1 2-2Z"/></svg>
+        Organiser
+      </button>
+      <div class="deadline">
+        <span class="deadline-label">Final deadline</span>
+        <strong>18 October 2026</strong>
+      </div>
+    </div>
+  </header>
+
+  <div class="admin-strip" id="adminStrip" hidden>
+    <div>
+      <span class="admin-dot" aria-hidden="true"></span>
+      <strong id="adminIdentity">Organiser mode</strong>
+      <span id="syncStatus">Ready</span>
+    </div>
+    <button type="button" id="adminExit">Exit organiser mode</button>
+  </div>
+
+  <main>
+    <section class="scoreboard" aria-labelledby="scoreboardTitle">
+      <div class="scoreboard-topline">
+        <p id="scoreboardTitle"><span class="live-mark" aria-hidden="true"></span> The cup</p>
+        <p id="lastUpdated">Awaiting first result</p>
+      </div>
+
+      <div class="score-stage">
+        <div class="team team-a">
+          <span class="team-label">Team A</span>
+          <strong>A’s</strong>
+          <span class="score" id="scoreA">0</span>
+        </div>
+        <div class="score-centre" aria-hidden="true">
+          <img src="assets/tondu-badge.png" alt="">
+          <span>VS</span>
+        </div>
+        <div class="team team-b">
+          <span class="team-label">Team B</span>
+          <strong>B’s</strong>
+          <span class="score" id="scoreB">0</span>
+        </div>
+      </div>
+
+      <div class="cup-progress" aria-label="Match progress">
+        <div class="progress-labels">
+          <span id="playedCount">0 of 8 played</span>
+          <span>8 points available</span>
+        </div>
+        <div class="point-track" id="pointTrack"></div>
+      </div>
+
+      <p class="score-call" id="scoreCall">All to play for.</p>
+    </section>
+
+    <section class="fixtures-section" aria-labelledby="fixturesTitle">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Eight matches · One point each</p>
+          <h2 id="fixturesTitle">The fixtures</h2>
+        </div>
+        <span class="section-rule" aria-hidden="true"></span>
+      </div>
+      <div class="fixtures" id="fixtures" aria-live="polite"></div>
+    </section>
+
+    <section class="photo-story" aria-labelledby="photoTitle">
+      <div class="photo-copy">
+        <p class="section-kicker">Tondu Padel</p>
+        <h2 id="photoTitle">For the badge.</h2>
+        <p>Sixteen pairs. Eight head-to-head matches. Every result moves the cup.</p>
+      </div>
+      <div class="photo-grid">
+        <figure><img src="assets/action-1.jpg" alt="Padel player striking a forehand" loading="lazy"></figure>
+        <figure><img src="assets/action-2.jpg" alt="Padel player ready to receive" loading="lazy"></figure>
+        <figure><img src="assets/action-3.jpg" alt="Padel player preparing for the next shot" loading="lazy"></figure>
+        <figure><img src="assets/action-4.jpg" alt="Padel player striking a forehand" loading="lazy"></figure>
+        <figure><img src="assets/action-5.jpg" alt="Padel player reaching for a shot" loading="lazy"></figure>
+        <figure><img src="assets/action-6.jpg" alt="Padel player moving across the court" loading="lazy"></figure>
+        <figure><img src="assets/action-7.jpg" alt="Padel player playing an overhead shot" loading="lazy"></figure>
+        <figure><img src="assets/action-8.jpg" alt="Padel player hitting a forehand" loading="lazy"></figure>
+        <figure><img src="assets/action-9.jpg" alt="Padel player following through on a shot" loading="lazy"></figure>
+        <figure><img src="assets/action-10.jpg" alt="Padel player meeting the ball" loading="lazy"></figure>
+        <figure><img src="assets/action-11.jpg" alt="Padel player striking the ball" loading="lazy"></figure>
+        <figure><img src="assets/action-12.jpg" alt="Padel player smiling on court" loading="lazy"></figure>
+        <figure><img src="assets/action-13.jpg" alt="Padel player laughing between points" loading="lazy"></figure>
+        <figure><img src="assets/action-14.jpg" alt="Padel player standing ready on court" loading="lazy"></figure>
+        <figure><img src="assets/action-15.jpg" alt="Two padel players preparing for the next point" loading="lazy"></figure>
+        <figure><img src="assets/action-16.jpg" alt="Two padel players smiling on court" loading="lazy"></figure>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <img src="assets/tondu-badge.png" alt="" width="38" height="38">
+    <p>Tondu Padel Ryder Cup 2026</p>
+  </footer>
+
+  <dialog class="modal" id="authDialog">
+    <div class="modal-card auth-card">
+      <button class="modal-close" type="button" data-close-dialog="authDialog" aria-label="Close">×</button>
+      <img src="assets/tondu-badge.png" alt="" width="70" height="70">
+      <p class="section-kicker">Organiser access</p>
+      <h2>Update the cup</h2>
+      <p>Enter the organiser passcode to add or correct a result.</p>
+      <form id="passcodeForm">
+        <label for="passcode">Organiser passcode</label>
+        <input id="passcode" name="passcode" type="password" minlength="6" autocomplete="current-password" required>
+        <button class="unlock-button" type="submit">Unlock score editing</button>
+      </form>
+      <p class="modal-note" id="authNote"></p>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="scoreDialog">
+    <form class="modal-card score-card" id="scoreForm">
+      <button class="modal-close" type="button" data-close-dialog="scoreDialog" aria-label="Close">×</button>
+      <p class="section-kicker" id="scoreFixtureLabel">Match</p>
+      <h2>Enter final score</h2>
+      <div class="score-team-head">
+        <span></span>
+        <strong class="score-team-a" id="scoreTeamA">A’s</strong>
+        <strong class="score-team-b" id="scoreTeamB">B’s</strong>
+      </div>
+      <div class="set-entry">
+        <label for="set1A">Set 1</label>
+        <input id="set1A" name="set1A" type="number" min="0" max="99" inputmode="numeric" autocomplete="off" required>
+        <input id="set1B" name="set1B" type="number" min="0" max="99" inputmode="numeric" autocomplete="off" required>
+      </div>
+      <div class="set-entry">
+        <label for="set2A">Set 2</label>
+        <input id="set2A" name="set2A" type="number" min="0" max="99" inputmode="numeric" autocomplete="off" required>
+        <input id="set2B" name="set2B" type="number" min="0" max="99" inputmode="numeric" autocomplete="off" required>
+      </div>
+      <div class="set-entry">
+        <label for="set3A">Set 3</label>
+        <input id="set3A" name="set3A" type="number" min="0" max="99" inputmode="numeric" autocomplete="off">
+        <input id="set3B" name="set3B" type="number" min="0" max="99" inputmode="numeric" autocomplete="off">
+      </div>
+      <p class="set-hint">Sets 1–2: tie-break at 6–6. Set 3: first to 7, winning by 2 clear games.</p>
+      <p class="form-error" id="scoreError" role="alert"></p>
+      <div class="modal-actions">
+        <button class="clear-button" id="clearResult" type="button">Clear result</button>
+        <span></span>
+        <button class="cancel-button" type="button" data-close-dialog="scoreDialog">Cancel</button>
+        <button class="save-button" type="submit">Save result</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="config.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
