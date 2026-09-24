@@ -374,10 +374,11 @@ footer { padding: 26px 20px 38px; display: flex; align-items: center; justify-co
 footer img { opacity: .7; }
 
 @media (max-width: 700px) {
-  .hero { min-height: 222px; }
-  .hero-inner { min-height: 222px; width: calc(100% - 28px); padding: 27px 0 24px; }
-  .hero-photo { left: 35%; opacity: .7; }
-  .hero-shade { background: linear-gradient(90deg, #07101f 0%, rgba(7,16,31,.92) 44%, rgba(7,16,31,.42) 100%), linear-gradient(0deg, #07101f 0%, transparent 50%); }
+  .hero { min-height: 0; display: flex; flex-direction: column; }
+  .hero-inner { order: 1; min-height: 0; width: calc(100% - 28px); padding: 27px 0 20px; gap: 24px; }
+  .hero-photo { position: relative; inset: auto; order: 2; width: 100%; aspect-ratio: 4 / 3; background-position: center; background-size: contain; opacity: 1; filter: saturate(.82) contrast(1.04); }
+  .hero-photo::after, .hero-shade { display: none; }
+  .scoreboard { margin-top: 14px; }
   .brand-lockup { gap: 12px; }
   .brand-lockup img { width: 61px; height: 61px; }
   .admin-entry { top: 16px; padding: 7px; }
