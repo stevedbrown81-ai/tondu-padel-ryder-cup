@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260925-two-sets">
 </head>
 <body>
   <header class="hero">
@@ -84,7 +84,7 @@
     <section class="fixtures-section" aria-labelledby="fixturesTitle">
       <div class="section-heading">
         <div>
-          <p class="section-kicker">Eight matches · One point each</p>
+          <p class="section-kicker">Eight matches · One point each, or half each for a draw</p>
           <h2 id="fixturesTitle">The fixtures</h2>
         </div>
         <span class="section-rule" aria-hidden="true"></span>
@@ -152,20 +152,15 @@
       </div>
       <div class="set-entry">
         <label for="set1A">Set 1</label>
-        <input id="set1A" name="set1A" type="number" min="0" max="99" inputmode="numeric" autocomplete="off" required>
-        <input id="set1B" name="set1B" type="number" min="0" max="99" inputmode="numeric" autocomplete="off" required>
+        <input id="set1A" name="set1A" type="number" min="0" step="1" inputmode="numeric" autocomplete="off" required>
+        <input id="set1B" name="set1B" type="number" min="0" step="1" inputmode="numeric" autocomplete="off" required>
       </div>
       <div class="set-entry">
         <label for="set2A">Set 2</label>
-        <input id="set2A" name="set2A" type="number" min="0" max="99" inputmode="numeric" autocomplete="off" required>
-        <input id="set2B" name="set2B" type="number" min="0" max="99" inputmode="numeric" autocomplete="off" required>
+        <input id="set2A" name="set2A" type="number" min="0" step="1" inputmode="numeric" autocomplete="off" required>
+        <input id="set2B" name="set2B" type="number" min="0" step="1" inputmode="numeric" autocomplete="off" required>
       </div>
-      <div class="set-entry">
-        <label for="set3A">Set 3</label>
-        <input id="set3A" name="set3A" type="number" min="0" max="99" inputmode="numeric" autocomplete="off">
-        <input id="set3B" name="set3B" type="number" min="0" max="99" inputmode="numeric" autocomplete="off">
-      </div>
-      <p class="set-hint">Sets 1–2: tie-break at 6–6. Set 3: first to 7, winning by 2 clear games.</p>
+      <p class="set-hint">Enter any non-negative whole-number score for each set. The higher score wins that set. A 1–1 split gives each side 0.5 point.</p>
       <p class="form-error" id="scoreError" role="alert"></p>
       <div class="modal-actions">
         <button class="clear-button" id="clearResult" type="button">Clear result</button>
@@ -179,6 +174,6 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="config.js"></script>
-  <script type="module" src="app.js"></script>
+  <script type="module" src="app.js?v=20260925-two-sets"></script>
 </body>
 </html>

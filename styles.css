@@ -208,6 +208,7 @@ main { width: min(1080px, calc(100% - 28px)); margin: 0 auto; }
 .point-segment { height: 5px; border-radius: 999px; background: rgba(255,255,255,.09); }
 .point-segment.a { background: var(--red); box-shadow: 0 0 10px rgba(215,43,47,.38); }
 .point-segment.b { background: var(--blue); box-shadow: 0 0 10px rgba(25,104,210,.42); }
+.point-segment.draw { background: linear-gradient(90deg, var(--red) 0 50%, var(--blue) 50%); }
 .score-call { margin: 0; padding: 9px 18px 12px; color: #fff; text-align: center; font-family: "Barlow Condensed", sans-serif; font-size: 1rem; font-weight: 600; letter-spacing: .025em; }
 
 .fixtures-section { padding: 46px 0 20px; }
@@ -225,6 +226,8 @@ main { width: min(1080px, calc(100% - 28px)); margin: 0 auto; }
 }
 .fixture.is-complete { border-color: rgba(65, 200, 135, .34); }
 .fixture.is-complete::before { background: var(--green); }
+.fixture.is-draw { border-color: rgba(244, 166, 42, .38); }
+.fixture.is-draw::before { background: linear-gradient(var(--red) 0 50%, var(--blue) 50%); }
 .fixture::before { position: absolute; inset: 0 auto 0 0; width: 3px; content: ""; background: linear-gradient(var(--red) 0 50%, var(--blue) 50%); }
 .fixture-head { display: flex; align-items: center; justify-content: space-between; min-height: 38px; padding: 0 14px 0 16px; border-bottom: 1px solid var(--line); }
 .fixture-number { color: #fff; font-family: "Barlow Condensed", sans-serif; font-size: .78rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
@@ -245,6 +248,7 @@ main { width: min(1080px, calc(100% - 28px)); margin: 0 auto; }
 .sets-line small { margin-right: 3px; color: var(--muted-2); font-size: .65rem; font-weight: 700; letter-spacing: .06em; }
 .pending-label { color: var(--muted-2); font-family: "Barlow Condensed", sans-serif; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
 .fixture.is-complete .pending-label { color: var(--green); }
+.fixture.is-draw .pending-label { color: var(--gold); }
 .edit-result {
   padding: 5px 8px;
   color: #fff;

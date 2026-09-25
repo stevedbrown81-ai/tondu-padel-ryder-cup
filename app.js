@@ -1,4 +1,4 @@
-import { validateMatchSets, setWins, winnerOf } from "./scoring.js";
+import { validateMatchSets, setWins, winnerOf, matchPoints } from "./scoring.js?v=20260925-two-sets";
 
 const EVENT = {
   id: "tondu-ryder-cup-2026",
@@ -87,19 +87,19 @@ function renderFixtures() {
   els.fixtures.innerHTML = EVENT.fixtures.map((fixture, index) => {
     const result = state.results[fixture.id];
     const wins = setWins(result?.sets || []);
-    const winner = winnerOf(result?.sets || []);
+    const outcome = winnerOf(result?.sets || []);
     return `
-      <article class="fixture ${winner ? "is-complete" : ""}" data-fixture="${fixture.id}">
+      <article class="fixture ${outcome ? "is-complete" : ""} ${outcome === "draw" ? "is-draw" : ""}" data-fixture="${fixture.id}">
         <div class="fixture-head">
           <span class="fixture-number">Match ${index + 1}</span>
-          <span class="fixture-status">${winner ? "Complete" : "To play"}</span>
+          <span class="fixture-status">${outcome === "draw" ? "Halved" : outcome ? "Complete" : "To play"}</span>
         </div>
-        <div class="pair-row pair-a ${winner === "a" ? "is-winner" : ""}">
+        <div class="pair-row pair-a ${outcome === "a" ? "is-winner" : ""}">
           <span class="side-tag">A</span>
           <span class="pair-name">${escapeHtml(fixture.a)}${captainLabel(fixture.aCaptain)}</span>
           <span class="set-total">${result ? wins.a : "—"}</span>
         </div>
-        <div class="pair-row pair-b ${winner === "b" ? "is-winner" : ""}">
+        <div class="pair-row pair-b ${outcome === "b" ? "is-winner" : ""}">
           <span class="side-tag">B</span>
           <span class="pair-name">${escapeHtml(fixture.b)}${captainLabel(fixture.bCaptain)}</span>
           <span class="set-total">${result ? wins.b : "—"}</span>
@@ -108,7 +108,7 @@ function renderFixtures() {
           <span class="sets-line">${formatSets(result)}</span>
           ${state.admin
             ? `<button class="edit-result" type="button" data-edit="${fixture.id}">${result ? "Edit" : "Add result"}</button>`
-            : `<span class="pending-label">${winner ? `1 point · ${winner.toUpperCase()}’s` : "Result pending"}</span>`}
+            : `<span class="pending-label">${outcome === "draw" ? "0.5 points each" : outcome ? `1 point · ${outcome.toUpperCase()}’s` : "Result pending"}</span>`}
         </div>
       </article>`;
   }).join("");
@@ -119,19 +119,25 @@ function renderFixtures() {
 }
 
 function renderScoreboard() {
-  const winners = EVENT.fixtures.map(fixture => winnerOf(state.results[fixture.id]?.sets || [])).filter(Boolean);
-  const scoreA = winners.filter(winner => winner === "a").length;
-  const scoreB = winners.filter(winner => winner === "b").length;
+  const outcomes = EVENT.fixtures.map(fixture => winnerOf(state.results[fixture.id]?.sets || []));
+  const scores = EVENT.fixtures.reduce((total, fixture) => {
+    const points = matchPoints(state.results[fixture.id]?.sets || []);
+    total.a += points.a;
+    total.b += points.b;
+    return total;
+  }, { a: 0, b: 0 });
+  const played = outcomes.filter(Boolean).length;
+  const { a: scoreA, b: scoreB } = scores;
   els.scoreA.textContent = scoreA;
   els.scoreB.textContent = scoreB;
-  els.playedCount.textContent = `${winners.length} of 8 played`;
-  els.pointTrack.innerHTML = Array.from({ length: 8 }, (_, index) => `<span class="point-segment ${winners[index] || ""}" aria-hidden="true"></span>`).join("");
+  els.playedCount.textContent = `${played} of 8 played`;
+  els.pointTrack.innerHTML = outcomes.map(outcome => `<span class="point-segment ${outcome || ""}" aria-hidden="true"></span>`).join("");
   els.lastUpdated.textContent = formatDate(state.lastUpdated);
 
-  if (!winners.length) els.scoreCall.textContent = "All to play for.";
-  else if (winners.length === 8 && scoreA === scoreB) els.scoreCall.textContent = "The cup is tied. Tie-break rule to be confirmed.";
-  else if (winners.length === 8) els.scoreCall.textContent = `${scoreA > scoreB ? "The A’s" : "The B’s"} win the Ryder Cup.`;
-  else if (scoreA === scoreB) els.scoreCall.textContent = `Level after ${winners.length} ${winners.length === 1 ? "match" : "matches"}.`;
+  if (!played) els.scoreCall.textContent = "All to play for.";
+  else if (played === 8 && scoreA === scoreB) els.scoreCall.textContent = "The cup finishes level.";
+  else if (played === 8) els.scoreCall.textContent = `${scoreA > scoreB ? "The A’s" : "The B’s"} win the Ryder Cup.`;
+  else if (scoreA === scoreB) els.scoreCall.textContent = `Level after ${played} ${played === 1 ? "match" : "matches"}.`;
   else els.scoreCall.textContent = `${scoreA > scoreB ? "The A’s" : "The B’s"} lead by ${Math.abs(scoreA - scoreB)}.`;
 }
 
@@ -168,7 +174,7 @@ function openScoreDialog(fixtureId) {
   els.scoreTeamB.textContent = fixture.b;
   els.scoreError.textContent = "";
   const sets = state.results[fixtureId]?.sets || [];
-  for (let index = 0; index < 3; index += 1) {
+  for (let index = 0; index < 2; index += 1) {
     els.scoreForm.elements[`set${index + 1}A`].value = sets[index]?.a ?? "";
     els.scoreForm.elements[`set${index + 1}B`].value = sets[index]?.b ?? "";
   }
@@ -211,7 +217,7 @@ els.scoreForm.addEventListener("submit", async event => {
   event.preventDefault();
   els.scoreError.textContent = "";
   try {
-    const sets = [readSet(1), readSet(2), readSet(3)].filter(Boolean);
+    const sets = [readSet(1), readSet(2)].filter(Boolean);
     const validation = validateMatchSets(sets);
     if (!validation.valid) throw new Error(validation.error);
     const result = { sets, winner: validation.winner };
@@ -367,7 +373,7 @@ function registerWebMcpTool() {
     void Promise.resolve(context.registerTool({
       name: "record_fixture_result",
       title: "Record fixture result",
-      description: "Save a completed Tondu Ryder Cup match result using full game scores for two or three sets. Organiser access is required.",
+      description: "Save a completed two-set Tondu Ryder Cup match. A 1–1 split awards 0.5 points to each side. Organiser access is required.",
       inputSchema: {
         type: "object",
         properties: {
@@ -375,7 +381,7 @@ function registerWebMcpTool() {
           sets: {
             type: "array",
             minItems: 2,
-            maxItems: 3,
+            maxItems: 2,
             items: {
               type: "object",
               properties: { a: { type: "integer", minimum: 0 }, b: { type: "integer", minimum: 0 } },
